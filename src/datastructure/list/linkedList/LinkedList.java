@@ -12,13 +12,14 @@ public class LinkedList {
      * 노드 삽입 메소드 <br/>
      * (가장 마지막에 삽입)
      * @param data
+     * @return LinkedList : 노드 중간삽입시 이전노드 데이터로 사용된다.
      */
-    public void insertNode(String data) {
+    public LinkedList insertNode(String data) {
         ListNode newNode = new ListNode(data); // 새 노드 객체 데이터 추가 및 생성
 
         if(this.head == null) { // 현재 노드가 비어있다면 단일계층(하위 참조 노드가 null) 신규 노드를 바로 추가
             this.head = newNode;
-            return;
+            return this;
         }
 
         ListNode tempNode = this.head; /* 현재 노드를 기준으로 마지막 노드까지 탐색하기 위해 임시 노드로 추출 */
@@ -29,6 +30,25 @@ public class LinkedList {
         }
 
         tempNode.pointer = newNode;// 마지막 노드의 null을 새 노드 객체로 초기화
+        return this;
+    }
+
+    /**
+     * 노드 중간 삽입 메소드 <br/>
+     * 노드와 노드간의 연결을 끊고 중간에 삽입한다.
+     * 예를들어 노드2와 노드3 사이에 데이터를 넣는다.
+     * 노드3의 데이터를 삽입할 새 노드의 pointer노드에 저장하고
+     * 이전 노드의 pointer(노드3이 저장됨)노드 참조 변수에 
+     * 노드3에 대한 참조작업 완료된 새 노드로 초기화한다. 
+     * @param prevNode : 삽입 후의 이전노드가 될 노드
+     * @param data : 링크드 리스트에 새로 삽입할 노드에 저장할 데이터
+     * @return LinkedList : 노드 중간삽입시 이전노드 데이터로 사용된다.
+     */
+    public LinkedList insertNode(ListNode prevNode, String data) {
+        ListNode newNode = new ListNode(data);
+        newNode.pointer = prevNode.pointer; // 이전노드의 pointer 즉, node3의 데이터를 신규 노드의 다음노드로 저장한다.
+        prevNode.pointer = newNode; // 신규노드를 이전노드의 포인터로 다시 저장한다 (원래 node3이 저장되어 있었음)
+        return this;
     }
 
     /**
@@ -67,6 +87,10 @@ public class LinkedList {
          */
         prevNode.pointer = null;
 
+    }
+
+    public ListNode getHead() {
+        return head;
     }
 
     /**
