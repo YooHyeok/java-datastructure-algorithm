@@ -2,10 +2,10 @@ package datastructure.list.linkedList;
 
 public class LinkedList {
 
-    private ListNode head;
+    private ListNode headNode;
 
     public LinkedList() {
-        head = null;
+        headNode = null;
     }
 
     /**
@@ -14,15 +14,15 @@ public class LinkedList {
      * @param data
      * @return LinkedList : 노드 중간삽입시 이전노드 데이터로 사용된다.
      */
-    public LinkedList insertNode(String data) {
+    public String insertNode(String data) {
         ListNode newNode = new ListNode(data); // 새 노드 객체 데이터 추가 및 생성
 
-        if(this.head == null) { // 현재 노드가 비어있다면 단일계층(하위 참조 노드가 null) 신규 노드를 바로 추가
-            this.head = newNode;
-            return this;
+        if(this.headNode == null) { // 현재 노드가 비어있다면 단일계층(하위 참조 노드가 null) 신규 노드를 바로 추가
+            this.headNode = newNode;
+            return newNode.getAddressValue();
         }
 
-        ListNode tempNode = this.head; /* 현재 노드를 기준으로 마지막 노드까지 탐색하기 위해 임시 노드로 추출 */
+        ListNode tempNode = this.headNode; /* 현재 노드를 기준으로 마지막 노드까지 탐색하기 위해 임시 노드로 추출 */
 
         /* 현재 노드의 하위 노드가 비어있을때 까지(마지막노드까지) 탐색*/
         while(tempNode.pointer!= null) {
@@ -30,7 +30,7 @@ public class LinkedList {
         }
 
         tempNode.pointer = newNode;// 마지막 노드의 null을 새 노드 객체로 초기화
-        return this;
+        return newNode.getAddressValue();
     }
 
     /**
@@ -40,15 +40,17 @@ public class LinkedList {
      * 노드3의 데이터를 삽입할 새 노드의 pointer노드에 저장하고
      * 이전 노드의 pointer(노드3이 저장됨)노드 참조 변수에 
      * 노드3에 대한 참조작업 완료된 새 노드로 초기화한다. 
-     * @param prevNode : 삽입 후의 이전노드가 될 노드
+     * @param prevPointer : 삽입 후의 이전노드가 될 노드의 주소값
      * @param data : 링크드 리스트에 새로 삽입할 노드에 저장할 데이터
      * @return LinkedList : 노드 중간삽입시 이전노드 데이터로 사용된다.
      */
-    public LinkedList insertNode(ListNode prevNode, String data) {
+//    public LinkedList insertNode(ListNode prevNode, String data) {
+    public String insertNode(String prevPointer, String data) {
+        ListNode prevNode = searchNode(prevPointer);
         ListNode newNode = new ListNode(data);
         newNode.pointer = prevNode.pointer; // 이전노드의 pointer 즉, node3의 데이터를 신규 노드의 다음노드로 저장한다.
         prevNode.pointer = newNode; // 신규노드를 이전노드의 포인터로 다시 저장한다 (원래 node3이 저장되어 있었음)
-        return this;
+        return newNode.getAddressValue();
     }
 
     /**
@@ -58,9 +60,9 @@ public class LinkedList {
     public void deleteNode() {
 
         ListNode prevNode = null;
-        ListNode tempNode = this.head; /* 현재 노드를 기준으로 마지막 노드까지 탐색하기 위해 임시 노드로 추출 */
+        ListNode tempNode = this.headNode; /* 현재 노드를 기준으로 마지막 노드까지 탐색하기 위해 임시 노드로 추출 */
 
-        if (this.head == null) { //현재 노드가 비어있다면 size 0이므로 삭제불가 -> return
+        if (this.headNode == null) { //현재 노드가 비어있다면 size 0이므로 삭제불가 -> return
             return;
         }
 
@@ -75,7 +77,7 @@ public class LinkedList {
          * 따라서 size가 1인 상태 이므로 현재 노드를 지운다.
          */
         if (prevNode == null) {
-            this.head = null;
+            this.headNode = null;
             return;
         }
 
@@ -86,11 +88,22 @@ public class LinkedList {
          * 이전노드의 pointer에 접근함으로써 마지막노드를 지우기 위함이다.
          */
         prevNode.pointer = null;
-
     }
 
-    public ListNode getHead() {
-        return head;
+    /**
+     * String타입 주소값으로 Node 탐색
+     * @return
+     */
+    public ListNode searchNode(String headAddress) {
+        ListNode tempNode = this.headNode;
+
+        while(tempNode != null) {
+            if(headAddress.equals(tempNode.getAddressValue())) {
+                return tempNode;
+            }
+            tempNode = tempNode.pointer;
+        }
+        return tempNode;
     }
 
     /**
@@ -100,7 +113,7 @@ public class LinkedList {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        ListNode tempNode = this.head;
+        ListNode tempNode = this.headNode;
         sb.append("[");
         while(tempNode != null) {
             sb.append(tempNode.getData());
