@@ -109,13 +109,14 @@ public class LinkedList {
 
         while(tempNode != null) {
             if (data.equals(tempNode.getData())) { // 현재 노드의 데이터가 일치하면
-
+                ListNode breakNode = (ListNode) tempNode.clone(); // (깊은복제) 따로 저장해야 연결을 끊을 수 있다.
                 /**
                  * 첫번째 노드 인 경우
                  */
                 if (prevNode == null) {
-                    this.headNode = tempNode.pointer; // 현재 노드를 덮어 씌우고
-                    tempNode.pointer = null; // 임시저장한 노드에서 포인터를 제거해버린다. (다음 삭제시 tempNode는 다시 초기화되므로 상관없음.)
+                    prevNode = tempNode.pointer;
+                    breakNode.pointer = null; // 따로 저장해서 연결을 끊어야한다.(복구가능성..?)
+                    this.headNode = prevNode; // 현재 노드에 다음노드를 덮어씌우기
                     return;
                 }
                 /**
@@ -126,8 +127,8 @@ public class LinkedList {
                     return;
                 }
                 //마지막 노드가 아닌 경우
-                prevNode.pointer = tempNode.pointer; // 다음노드에
-                tempNode.pointer = null;
+                breakNode.pointer = null; //연결 끊기
+                prevNode.pointer = tempNode.pointer; // 다음노드에 다다음노드를 덮어씌운다.
                 return;
             }
             prevNode = tempNode;
