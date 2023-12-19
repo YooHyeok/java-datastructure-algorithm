@@ -1,8 +1,4 @@
-package datastructure.list.linkedList;
-
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+package datastructure.liner_structure.list.linkedList;
 
 public class LinkedList {
 

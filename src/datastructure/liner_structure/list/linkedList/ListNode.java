@@ -1,4 +1,4 @@
-package datastructure.list.linkedList;
+package datastructure.liner_structure.list.linkedList;
 
 
 public class ListNode implements Cloneable{
@@ -20,6 +20,23 @@ public class ListNode implements Cloneable{
         this.pointer = pointer;
     }
 
+    /**
+     * 깊은 복제 <br/>
+     * 중간 데이터 삭제시 링크를 끊기 위해 복제를 한다. <br/>
+     * 이때, 일반적인 얕은복제시, 주소값을 가지고있기 때문에 <br/>
+     * Hierarchy한 특성을 가진 LinkedList의 각 Node를 깊은 복제를 한 뒤 <br/>
+     * 복제한 객체에서 링크를 끊어버린다.
+     * @return
+     */
+    @Override
+    protected Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String getData() {
         return this.data;
     }
@@ -37,20 +54,4 @@ public class ListNode implements Cloneable{
                 '}';
     }
 
-    /**
-     * 깊은 복제 <br/>
-     * 중간 데이터 삭제시 링크를 끊기 위해 복제를 한다. <br/>
-     * 이때, 일반적인 얕은복제시, 주소값을 가지고있기 때문에 <br/>
-     * Hierarchy한 특성을 가진 LinkedList의 각 Node를 깊은 복제를 한 뒤 <br/>
-     * 복제한 객체에서 링크를 끊어버린다.
-     * @return
-     */
-    @Override
-    protected Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
