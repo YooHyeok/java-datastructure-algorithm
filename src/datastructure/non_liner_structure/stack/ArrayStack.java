@@ -85,4 +85,24 @@ public class ArrayStack implements Stack{
         stackArr = new char[this.stackSize]; // 새 스택 배열 생성 후 초기화
     }
 
+    /**
+     * Stack 요소 순차 출력용 toString
+     * @return
+     */
+    @Override
+    public String toString() {
+        int tempTop = top;
+        StringBuffer sb = new StringBuffer("[");
+
+        for (char data : stackArr) {
+            if(tempTop == -1) {
+                sb.append("]");
+                return sb.toString();
+            }
+            sb.append(Character.toString(data));
+            if(tempTop != 0) sb.append(", ");
+            --tempTop;
+        }
+        return sb.toString();
+    }
 }

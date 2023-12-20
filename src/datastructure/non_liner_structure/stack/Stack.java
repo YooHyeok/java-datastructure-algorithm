@@ -14,4 +14,5 @@ public interface Stack {
     char pop();
     char peek();
     void clear();
+    String toString();
 }
