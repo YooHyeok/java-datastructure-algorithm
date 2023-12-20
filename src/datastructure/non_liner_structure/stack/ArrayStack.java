@@ -4,7 +4,7 @@ import java.util.AbstractCollection;
 import java.util.Arrays;
 
 public class ArrayStack implements Stack{
-    
+
     private int top; // Stack의 포인터
     private int stackSize; // Stack 사이즈 
     private char stackArr[]; // 스택 배열
@@ -66,23 +66,23 @@ public class ArrayStack implements Stack{
 
     /**
      * 출력 <br/>
-     * 스택에서 top 포인터가 가리키는 데이터를 단순히 출력
+     * 스택에서 top 포인터가 가리키는 데이터를 단순히 출력 <br/>
+     * 비어있어도 출력은 가능하다 (빈 배열[])
      * @return
      */
     @Override
     public char peek() {
-        if(isEmpty()) throw new RuntimeException("스택에 데이터가 존재하지 않습니다. 데이터를 추출할 수 없습니다.");
         return this.stackArr[top];
     }
 
     /**
      * 전체 삭제
+     * 포인터를 초기로 돌렸는데, 사실 char배열을 새로 생성해서 덮어씌우는거나
+     * 포인터값만 -1로 돌리는것 둘다 메모리는 배열 크기만큼 차지하게된다.
      */
     @Override
     public void clear() {
-        if(isEmpty()) throw new RuntimeException("스택에 데이터가 존재하지 않습니다. 데이터를 추출할 수 없습니다.");
         top = -1;
-        stackArr = new char[this.stackSize]; // 새 스택 배열 생성 후 초기화
     }
 
     /**
