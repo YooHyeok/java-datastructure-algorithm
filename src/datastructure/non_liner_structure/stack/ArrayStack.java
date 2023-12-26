@@ -1,7 +1,6 @@
 package datastructure.non_liner_structure.stack;
 
-import java.util.AbstractCollection;
-import java.util.Arrays;
+import java.util.*;
 
 public class ArrayStack implements Stack{
 
@@ -79,10 +78,21 @@ public class ArrayStack implements Stack{
      * 전체 삭제
      * 포인터를 초기로 돌렸는데, 사실 char배열을 새로 생성해서 덮어씌우는거나
      * 포인터값만 -1로 돌리는것 둘다 메모리는 배열 크기만큼 차지하게된다.
+     * (char 타입의 빈 데이터는 '\0' 혹은 `\0000`으로 채워지기 때문에
+     * 포인터를 초기로 돌리고 이후 데이터를 덮어씌우는것과 동일하다..)
      */
     @Override
     public void clear() {
         top = -1;
+//        stackArr = new char[this.stackSize];
+    }
+
+    /**
+     * 내부 공간은 외부에서 조회할수 없다.
+     * @return
+     */
+    private char[] getStackArr() {
+        return stackArr;
     }
 
     /**
