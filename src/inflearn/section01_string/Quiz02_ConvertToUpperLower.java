@@ -23,6 +23,7 @@ public class Quiz02_ConvertToUpperLower {
         Scanner in=new Scanner(System.in);
         String input = in.next();
         System.out.println(solution(input));
+        System.out.println(stream(input));
     }
 
     private static String solution(String input) {
@@ -33,4 +34,14 @@ public class Quiz02_ConvertToUpperLower {
         return sb.toString();
     }
 
+    private static String stream(String input) {
+//        return input.chars()
+//                .mapToObj(data ->Character.valueOf((char) data))
+//                .map(data -> Character.isUpperCase(data) ? Character.toLowerCase(data) : Character.toUpperCase(data))
+//                .map(String::valueOf)
+//                .collect(Collectors.joining());
+        return input.chars()
+                .mapToObj(data -> String.valueOf(Character.isUpperCase(Character.valueOf((char) data)) ? Character.toLowerCase(Character.valueOf((char) data)) : Character.toUpperCase(Character.valueOf((char) data))))
+                .collect(Collectors.joining());
+    }
 }
