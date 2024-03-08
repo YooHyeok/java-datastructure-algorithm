@@ -23,12 +23,24 @@ public class Quiz01_CountCharacter {
         String input1 = in.next();
         String input2 = in.next();
         System.out.println(solution(input1, input2));
+        System.out.println(stream(input1, input2));
     }
 
     private static int solution(String input1, String input2) {
         int count = 0;
         for (char input1CharArr : input1.toUpperCase().toCharArray()) if (input1CharArr == input2.toUpperCase().charAt(0)) count++;
         return count;
+    }
+
+    /**
+     * Stream 한줄좌 풀이
+     * String.chars() : char단위로 끊어 IntStream으로 변환한다.
+     * @param input1
+     * @param input2
+     * @return
+     */
+    static int stream(String input1, String input2) {
+        return (int)input1.toUpperCase().chars().filter(value -> value == input2.toUpperCase().charAt(0)).count();
     }
 
 }
