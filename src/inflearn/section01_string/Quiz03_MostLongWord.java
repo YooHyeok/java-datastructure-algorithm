@@ -25,6 +25,7 @@ public class Quiz03_MostLongWord {
         System.out.println(solution(input));
         System.out.println(answer(input));
         System.out.println(refactor(input));
+        System.out.println(stream(input));
     }
 
     private static String solution(String input) {
@@ -69,4 +70,11 @@ public class Quiz03_MostLongWord {
         return answer;
     }
 
+    private static String stream(String input) {
+        return Arrays.stream(input.split(" "))
+                .filter(value -> value.length() == Arrays.stream(input.split(" "))
+                        .mapToInt(intValue -> intValue.length())
+                        .max().getAsInt())
+                .findFirst().get();
+    }
 }
