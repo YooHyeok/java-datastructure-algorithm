@@ -23,6 +23,8 @@ public class Quiz03_MostLongWord {
         Scanner in=new Scanner(System.in);
         String input = in.nextLine();
         System.out.println(solution(input));
+        System.out.println(answer(input));
+        System.out.println(refactor(input));
     }
 
     private static String solution(String input) {
@@ -37,4 +39,34 @@ public class Quiz03_MostLongWord {
         }
         return answer;
     }
+
+    private static String answer(String input) {
+        String[] intputArr = input.split(" ");
+        int max = Integer.MIN_VALUE;// 약 -21470000
+        String answer = null;
+        for (String data : intputArr) {
+            if (data.length() > max) {
+                max = data.length();
+                answer = data;
+            }
+        }
+        return answer;
+    }
+
+    private static String refactor(String input) {
+        int max = Integer.MIN_VALUE;// 약 -21470000
+        int pos;
+        String answer = null;
+        while ((pos = input.indexOf(' ')) != -1) { // 문자열에서 공백이 위치한 index값
+            String data = input.substring(0, pos); // 0 ~ 공백 전까지 자른 단어
+            if (data.length() > max) {
+                max = data.length();
+                answer = data;
+            }
+            input = input.substring(pos + 1); // 현재 공백위치 다음 단어 시작부터 문자열 끝까지 잘라내기
+        }
+        if(input.length() > max) answer = input; // 마지막에 대한 단어 끝에는 pos를 구할수 없으므로 마지막 데이터에대한 처리.
+        return answer;
+    }
+
 }
