@@ -39,6 +39,8 @@ public class Quiz04_ReverseWord {
         }
         for (String word : solution(inputStringArr)) System.out.println(word);
         for (String word : solution2(inputStringArr)) System.out.println(word);
+        for (String word : answer(inputStringArr)) System.out.println(word);
+
 
     }
     private static String[] solution(String[] inputStringArr) {
@@ -64,5 +66,12 @@ public class Quiz04_ReverseWord {
         return inputStringArr;
     }
 
+    private static List<String> answer(String[] inputStringArr) {
+        List<String> answer = new ArrayList<>();
+        for (String word :inputStringArr) {
+            answer.add(new StringBuilder(word).reverse().toString());
+        }
+        return answer;
+    }
 
 }
