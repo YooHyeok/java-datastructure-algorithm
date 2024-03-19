@@ -41,6 +41,7 @@ public class Quiz04_ReverseWord {
         for (String word : solution2(inputStringArr)) System.out.println(word);
         for (String word : answer(inputStringArr)) System.out.println(word);
         for (String word : refactor(inputStringArr)) System.out.println(word);
+        for (String word : stream(inputStringArr)) System.out.println(word);
 
     }
     private static String[] solution(String[] inputStringArr) {
@@ -89,4 +90,9 @@ public class Quiz04_ReverseWord {
         }
         return answer;
     }
+    private static List<String> stream(String[] inputStringArr) {
+        return Arrays.stream(inputStringArr).map(data -> new StringBuilder(data).reverse().toString()).collect(Collectors.toList());
+    }
+
+
 }
