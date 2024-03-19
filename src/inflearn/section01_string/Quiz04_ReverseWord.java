@@ -40,7 +40,7 @@ public class Quiz04_ReverseWord {
         for (String word : solution(inputStringArr)) System.out.println(word);
         for (String word : solution2(inputStringArr)) System.out.println(word);
         for (String word : answer(inputStringArr)) System.out.println(word);
-
+        for (String word : refactor(inputStringArr)) System.out.println(word);
 
     }
     private static String[] solution(String[] inputStringArr) {
@@ -73,5 +73,20 @@ public class Quiz04_ReverseWord {
         }
         return answer;
     }
-
+    private static List<String> refactor(String[] inputStringArr) {
+        List<String> answer = new ArrayList<>();
+        for (String input : inputStringArr) {
+            char[] charArr = input.toCharArray();
+            int lt = 0, rt = charArr.length-1;
+            while (lt < rt) {
+                char temp = charArr[lt]; // 첫글자 임시저장
+                charArr[lt] = charArr[rt]; // 끝글자 첫글자위치로
+                charArr[rt] = temp; // 첫글자 끝글자 위치로
+                lt ++; // 첫글자 포인터 우측 이동
+                rt --; // 끝글자 포인터 좌측 이동
+            }
+            answer.add(String.valueOf(charArr));
+        }
+        return answer;
+    }
 }
