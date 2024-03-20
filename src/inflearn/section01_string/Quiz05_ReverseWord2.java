@@ -22,6 +22,7 @@ public class Quiz05_ReverseWord2 {
         Scanner in=new Scanner(System.in);
         String input = in.next();
         System.out.println(solution(input));
+        System.out.println(answer(input));
     }
     private static String solution(String input) {
         char[] chars = input.toCharArray();
@@ -35,4 +36,24 @@ public class Quiz05_ReverseWord2 {
         }
         return String.valueOf(chars);
     }
+
+    public static String answer(String str){
+        String answer;
+        char[] s=str.toCharArray();
+        int lt=0, rt=str.length()-1;
+        while(lt<rt){
+            if(!Character.isAlphabetic(s[lt])) lt++;
+            else if(!Character.isAlphabetic(s[rt])) rt--;
+            else{
+                char tmp=s[lt];
+                s[lt]=s[rt];
+                s[rt]=tmp;
+                lt++;
+                rt--;
+            }
+        }
+        answer=String.valueOf(s);
+        return answer;
+    }
+
 }
