@@ -23,6 +23,7 @@ public class Quiz05_ReverseWord2 {
         String input = in.next();
         System.out.println(solution(input));
         System.out.println(answer(input));
+        System.out.println(stream(input));
     }
     private static String solution(String input) {
         char[] chars = input.toCharArray();
@@ -56,4 +57,7 @@ public class Quiz05_ReverseWord2 {
         return answer;
     }
 
+    private static String stream(String input) {
+        return new StringBuilder(input.chars().mapToObj(Character::toString).collect(Collectors.joining())).reverse().toString();
+    }
 }
