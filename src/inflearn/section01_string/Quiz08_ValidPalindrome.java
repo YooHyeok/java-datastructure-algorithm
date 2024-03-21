@@ -25,6 +25,7 @@ public class Quiz08_ValidPalindrome {
         Scanner in=new Scanner(System.in);
         String input = in.nextLine();
         System.out.println(solution(input));
+        System.out.println(answer(input));
     }
     private static String solution(String input) {
         String str = input.toUpperCase().replaceAll("[^A-Z]", "");// 정규식 ^ = 부정 즉, A~Z가 아니면 "" 빈문자로 변경
@@ -39,6 +40,14 @@ public class Quiz08_ValidPalindrome {
             answer = "NO";
             break;
         }
+        return answer;
+    }
+
+    private static String answer(String input) {
+        String answer="NO";
+        input = input.toUpperCase().replaceAll("[^A-Z]", "");
+        String tmp=new StringBuilder(input).reverse().toString();
+        if(input.equals(tmp)) answer="YES";
         return answer;
     }
 
