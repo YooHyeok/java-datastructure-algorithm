@@ -25,6 +25,7 @@ public class Quiz07_Palindrome {
         String input = in.next();
         System.out.println(solution(input));
         System.out.println(answer(input));
+        System.out.println(refactor(input));
     }
     private static String solution(String input) {
         String str = input.toUpperCase();
@@ -53,6 +54,9 @@ public class Quiz07_Palindrome {
             break;
         }
         return answer;
+    }
+    private static String refactor(String input) {
+        return input.toUpperCase().equals(new StringBuilder(input.toUpperCase()).reverse().toString()) ? "YES" : "NO";
     }
 
 }
