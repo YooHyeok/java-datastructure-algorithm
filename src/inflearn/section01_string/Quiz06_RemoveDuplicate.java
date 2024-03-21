@@ -22,6 +22,7 @@ public class Quiz06_RemoveDuplicate {
         Scanner in=new Scanner(System.in);
         String input = in.next();
         System.out.println(solution(input));
+        System.out.println(answer(input));
     }
     private static String solution(String input) {
         char[] chars = input.toCharArray();
@@ -33,6 +34,14 @@ public class Quiz06_RemoveDuplicate {
         }
         for(char c: chars) if (c != 0) sb.append(c);
         return String.valueOf(sb);
+    }
+
+    private static String answer(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if(str.indexOf(str.charAt(i)) == i) sb.append(str.charAt(i)); // str.indexOf 인덱스 검색시 가장 먼저 검색되는 인덱스 값으로 반환된다.
+        }
+        return sb.toString();
     }
 
 }
