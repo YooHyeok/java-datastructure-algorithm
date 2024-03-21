@@ -24,7 +24,7 @@ public class Quiz07_Palindrome {
         Scanner in=new Scanner(System.in);
         String input = in.next();
         System.out.println(solution(input));
-
+        System.out.println(answer(input));
     }
     private static String solution(String input) {
         String str = input.toUpperCase();
@@ -39,6 +39,18 @@ public class Quiz07_Palindrome {
             answer = "NO";
             break;
 
+        }
+        return answer;
+    }
+
+    private static String answer(String input) {
+        String answer = "YES";
+        String str = input.toUpperCase();
+        int length = str.length();
+        for (int i = 0; i < length/2; i++) {
+            if(str.charAt(i) != str.charAt(length-1-i)) return "NO";
+            answer = "YES";
+            break;
         }
         return answer;
     }
