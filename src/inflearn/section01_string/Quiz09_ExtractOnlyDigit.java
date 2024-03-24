@@ -26,6 +26,7 @@ public class Quiz09_ExtractOnlyDigit {
         String input = in.nextLine();
         System.out.println(solution(input));
         System.out.println(answer(input));
+        System.out.println(answer2(input));
     }
     private static int solution(String input) {
         return Integer.parseInt(input.replaceAll("[^0-9]", ""));
@@ -37,5 +38,13 @@ public class Quiz09_ExtractOnlyDigit {
             if (data >= 48 && data <= 57) answer = answer * 10 + (data-48); // 십진수화 (0, 2, 20, 205)
         }
         return answer;
+    }
+
+    private static int answer2(String input) {
+        String answer = "";
+        for(char data : input.toCharArray()) {
+            if (Character.isDigit(data)) answer += data;
+        }
+        return Integer.parseInt(answer);
     }
 }
