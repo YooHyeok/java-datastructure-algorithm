@@ -27,6 +27,7 @@ public class Quiz09_ExtractOnlyDigit {
         System.out.println(solution(input));
         System.out.println(answer(input));
         System.out.println(answer2(input));
+        System.out.println(refactor(input));
     }
     private static int solution(String input) {
         return Integer.parseInt(input.replaceAll("[^0-9]", ""));
@@ -46,5 +47,14 @@ public class Quiz09_ExtractOnlyDigit {
             if (Character.isDigit(data)) answer += data;
         }
         return Integer.parseInt(answer);
+    }
+
+    private static int refactor(String input) {
+        return Integer.parseInt(
+                input.chars()
+                        .filter(Character::isDigit)
+                        .mapToObj(Character::toString)
+                        .collect(Collectors.joining())
+        );
     }
 }
