@@ -32,6 +32,10 @@ public class Quiz10_MostShortInterval {
         for (int i : solution2(str, ch)) {
             System.out.print(i + " ");
         }
+        System.out.println();
+        for (int i : answer(str, ch)) {
+            System.out.print(i + " ");
+        }
     }
     private static int[] solution(String str, char ch) {
         char[] charArr = str.toCharArray();
@@ -51,6 +55,7 @@ public class Quiz10_MostShortInterval {
         return charIntervalArr;
     }
 
+
     private static int[] solution2(String input, char ch) {
         char[] charArr = input.toCharArray();
         int[] idxArr = new int[charArr.length];
@@ -67,4 +72,28 @@ public class Quiz10_MostShortInterval {
         return idxArr;
     }
 
+    private static int[] answer(String input, char ch) {
+        int[] answer = new int[input.length()];
+        int p = 1000;
+        for (int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == ch) {//toCharArray대신 charAt으로 문자값 반환 및 확인.
+                p = 0;
+                answer[i] = p;
+            } else {
+                p++;
+                answer[i] = p;
+            }
+        }
+        p = 1000;
+        for (int i = input.length()-1; i >= 0; i--) {
+            if(input.charAt(i) == ch) {
+                p = 0;
+                answer[i] = p;
+            } else {
+                p++;
+                answer[i] = Math.min(answer[i], p);
+            }
+        }
+        return answer;
+    }
 }
