@@ -36,6 +36,10 @@ public class Quiz10_MostShortInterval {
         for (int i : answer(str, ch)) {
             System.out.print(i + " ");
         }
+        System.out.println( );
+        for (int i : refactor(str, ch)) {
+            System.out.print(i + " ");
+        }
     }
     private static int[] solution(String str, char ch) {
         char[] charArr = str.toCharArray();
@@ -93,6 +97,21 @@ public class Quiz10_MostShortInterval {
                 p++;
                 answer[i] = Math.min(answer[i], p);
             }
+        }
+        return answer;
+    }
+
+    private static int[] refactor(String input, char ch) {
+        int[] answer = new int[input.length()];
+        int p = 1000;
+        for (int i = 0; i < input.length(); i++) {
+            p = input.charAt(i) == ch ? 0 : ++p;
+            answer[i] = p;
+        }
+        p = 1000;
+        for (int i = input.length()-1; i >= 0; i--) {
+            p = input.charAt(i) == ch ? 0 : ++p;
+            answer[i] = Math.min(answer[i], p);
         }
         return answer;
     }
