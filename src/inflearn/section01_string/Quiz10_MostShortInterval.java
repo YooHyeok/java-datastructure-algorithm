@@ -28,6 +28,10 @@ public class Quiz10_MostShortInterval {
         for (int i : solution(str, ch)) {
             System.out.print(i + " ");
         }
+        System.out.println();
+        for (int i : solution2(str, ch)) {
+            System.out.print(i + " ");
+        }
     }
     private static int[] solution(String str, char ch) {
         char[] charArr = str.toCharArray();
@@ -46,4 +50,21 @@ public class Quiz10_MostShortInterval {
         }
         return charIntervalArr;
     }
+
+    private static int[] solution2(String input, char ch) {
+        char[] charArr = input.toCharArray();
+        int[] idxArr = new int[charArr.length];
+        int p = charArr.length;
+        for (int i = 0; i < charArr.length; i++) {
+            p = charArr[i] == ch ? 0 : p+1; // 문자열의 현재 커서 요소가 ch라면 ? 0 : ++p
+            idxArr[i] = p;
+        }
+        p = charArr.length;
+        for (int i = charArr.length-1; i >= 0; i--) {
+            p = charArr[i] == ch ? 0 : p+1;
+            idxArr[i] = idxArr[i] > p ? p : idxArr[i];
+        }
+        return idxArr;
+    }
+
 }
