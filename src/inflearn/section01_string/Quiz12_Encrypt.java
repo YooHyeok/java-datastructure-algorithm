@@ -42,6 +42,8 @@ public class Quiz12_Encrypt {
         int count = in.nextInt();
         String input = in.next(); // #****###**#####**#####**##**
         System.out.println(solution(count, input));
+        System.out.println(answer(count, input));
+        System.out.println(stream(count, input));
     }
 
     private static String solution(int count, String str) {
@@ -64,4 +66,20 @@ public class Quiz12_Encrypt {
         return answer;
     }
 
+    private static String stream(int count, String str) {
+
+        /*String collect = IntStream.range(0, count)
+                .mapToObj(index ->
+                        String.valueOf((char) Integer.parseInt(str.replace("#", "1").replace("*", "0")
+                                .substring(index * ((str.length() + 1) / count), (index + 1) * ((str.length() + 1) / count)), 2))
+                )
+                .collect(Collectors.joining());*/
+
+        return IntStream.range(0, count)
+                .mapToObj(index -> str.substring(index * ((str.length() + 1) / count), (index + 1) * ((str.length() + 1) / count)))
+                .map(string -> string.replace("#", "1").replace("*", "0"))
+                .map(string -> (char) Integer.parseInt(string,2))
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
 }
