@@ -24,6 +24,9 @@ public class Quiz11_CompressString {
 //        String str = in.next();
 
         System.out.println(solution("KKHSSSSSSSE"));
+        System.out.println(answer("KKHSSSSSSSE"));
+        System.out.println(dongil("KKHSSSSSSSE"));
+        System.out.println(dongil("KSTTTSEEKFKKKDJJGG"));
 
     }
     private static String solution_wrong(String str) {
