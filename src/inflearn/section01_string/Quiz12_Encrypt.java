@@ -54,4 +54,14 @@ public class Quiz12_Encrypt {
         }
         return sb.toString();
     }
+
+    private static String answer(int count, String str) {
+        String answer = "";
+        String replace = str.replace("#", "1").replace("*", "0");
+        for (int i = 0; i < replace.length(); i+=(replace.length()+1)/count) {
+            answer += Integer.parseInt(replace.substring(i, i + 7),2);
+        }
+        return answer;
+    }
+
 }
