@@ -19,6 +19,7 @@ public class Quiz01_LargeNumberPrint {
 //        System.out.println(solution(input));
 
         System.out.println(solution(new int[]{130, 135, 148, 140, 145, 150, 153}));
+        System.out.println(answer(new int[]{130, 135, 148, 140, 145, 150, 153}));
 
     }
 
@@ -30,6 +31,15 @@ public class Quiz01_LargeNumberPrint {
                 max = i;
                 answer++;
             }
+        }
+        return answer;
+    }
+
+    private static List<Integer> answer(int[] ints) {
+        List<Integer> answer = new ArrayList<>();
+        answer.add(ints[0]);
+        for (int i = 1; i < ints.length; i++) {
+            if(ints[i] > ints[i-1]) answer.add(ints[i]);
         }
         return answer;
     }
