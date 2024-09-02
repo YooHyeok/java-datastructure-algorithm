@@ -20,6 +20,7 @@ public class Quiz01_LargeNumberPrint {
 
         System.out.println(solution(new int[]{130, 135, 148, 140, 145, 150, 153}));
         System.out.println(answer(new int[]{130, 135, 148, 140, 145, 150, 153}));
+        System.out.println(stream(new int[]{130, 135, 148, 140, 145, 150, 153}));
 
     }
 
@@ -44,4 +45,9 @@ public class Quiz01_LargeNumberPrint {
         return answer;
     }
 
+    private static int stream(int[] ints) {
+        return (int) IntStream.range(0, ints.length)
+                .filter(i -> i != 0 && ints[i] > ints[i - 1])
+                .count();
+    }
 }
