@@ -11,6 +11,7 @@ public class Quiz02_VisibleStudent {
             intArr[i] = in.nextInt();
         }
         System.out.println(solution(intArr));
+        System.out.println(answer(intArr));
 
     }
     private static int solution(int[] ints) {
@@ -19,6 +20,16 @@ public class Quiz02_VisibleStudent {
         for (int i : ints) {
             if (max < i) {
                 max = i;
+                answer++;
+            }
+        }
+        return answer;
+    }
+    private static int answer(int[] ints) {
+        int answer=1, max = ints[0];
+        for(int i=1; i<ints.length; i++){
+            if(ints[i]>max){
+                max=ints[i];
                 answer++;
             }
         }
