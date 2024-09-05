@@ -9,6 +9,7 @@ public class Quiz04_FibonacciSequence {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         solution(n);
+        answer1(n);
     }
 
     // 1 1 2 3 5 8 13
@@ -21,6 +22,21 @@ public class Quiz04_FibonacciSequence {
             temp = next;
             next = cur + next;
             cur = temp;
+        }
+    }
+
+    /**
+     * 배열을 사용하지 않고 손코딩하는 경우
+     * @param n
+     */
+    private static void answer1(int n) {
+        int a = 1, b = 1, c;
+        System.out.print(a + " " + b);
+        for (int i = 2; i < n; i++) {
+            c = a + b;
+            System.out.print(" " + c);
+            a = b;
+            b = c;
         }
     }
 
