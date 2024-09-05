@@ -10,6 +10,7 @@ public class Quiz04_FibonacciSequence {
         int n = sc.nextInt();
         solution(n);
         answer1(n);
+        for (int x : answer2(n)) System.out.print(x + " ");
     }
 
     // 1 1 2 3 5 8 13
@@ -38,6 +39,18 @@ public class Quiz04_FibonacciSequence {
             a = b;
             b = c;
         }
+    }
+
+    /**
+     * 피보나치 수열 규칙중 첫번째, 두번째 두개의 항은 무조건 1,1 이다.
+     * @param n
+     */
+    private static int[] answer2(int n) {
+        int[] answer = new int[n];
+        answer[0] = answer[1] = 1;
+        for(int i = 2; i < n; i++)
+            answer[i] = answer[i-2] + answer[i - 1];
+        return answer;
     }
 
 }
