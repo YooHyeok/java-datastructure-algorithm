@@ -8,6 +8,7 @@ public class Quiz05_PrimeNumber {
         int input = sc.nextInt();
         System.out.println(wrong_solution(input));
         System.out.println(solution(input));
+        System.out.println(answer(input));
 
     }
 
@@ -55,4 +56,30 @@ public class Quiz05_PrimeNumber {
         System.out.println("count = " + count);
         return numbers.size();
     }
+
+    /**
+     * 1부터 입력받은 값 까지의 모든 정수를 담을 수 있는 길이의 배열을 생성한다.
+     * (1부터 이므로 n+1로 지정해야함 - 실제는 0도 포함하므로 0 ~ n까지 n+1개)
+     * 소수를 판별할 값을 소수의 최소값 2로 지정하여 Loop를 돌린다.
+     * 배열은 모두 0으로 초기화되어 있고, i값은 2부터 시작하여 해당 배열인덱스가 0인지 확인한다.
+     * (index 0과 1은 값이 0,1 이므로 소수에 포함되지 않기 때문에 index 2부터 시작한다.)
+     */
+    private static int answer(int n) {
+        int answer = 0;
+        int count = 0;
+        int[] check = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            if (check[i] == 0) {
+                answer++;
+                for (int j = i; j <= n; j = j + i) {
+                    check[j] = 1;
+                    count++;
+                }
+            }
+        }
+        System.out.println("check = " + Arrays.toString(check));
+        System.out.println("count = " + count);
+        return answer;
+    }
+
 }
