@@ -7,6 +7,7 @@ public class Quiz05_PrimeNumber {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         System.out.println(wrong_solution(input));
+        System.out.println(solution(input));
 
     }
 
@@ -37,4 +38,21 @@ public class Quiz05_PrimeNumber {
         return primes.size();
     }
 
+    private static int solution(int input) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i < input; i++) {
+            numbers.add(i+1);
+        }
+        int count = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            for (int j = 0; j < numbers.size(); j++) {
+                if (j != i && numbers.get(j) % numbers.get(i) == 0) {
+                    numbers.remove(j);
+                }
+                count++;
+            }
+        }
+        System.out.println("count = " + count);
+        return numbers.size();
+    }
 }
