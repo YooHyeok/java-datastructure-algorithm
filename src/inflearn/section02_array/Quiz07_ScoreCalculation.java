@@ -15,6 +15,7 @@ public class Quiz07_ScoreCalculation {
 
         System.out.println(answer(length, intArr));
         System.out.println(refactor(length, intArr));
+        System.out.println(solution(length, intArr));
 
     }
 
@@ -36,4 +37,18 @@ public class Quiz07_ScoreCalculation {
         }
         return answer;
     }
+
+    private static int solution(int length, int[] intArr) {
+        int answer = 0, cnt = 0;
+        for (int i = 0; i < length; i++) {
+            if (intArr[i] == 1) {
+                cnt++;
+                answer += cnt;
+            } else {
+                cnt = 0;
+            }
+        }
+        return answer;
+    }
+
 }
