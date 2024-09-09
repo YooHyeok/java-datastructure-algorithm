@@ -19,6 +19,10 @@ public class Quiz06_ReversePrimeNumber {
         for (int i : answer(length, intArr)) {
             System.out.print(" " + i);
         }
+        System.out.println();
+        for (int i : stream(length, intArr)) {
+            System.out.print(" " + i);
+        }
 
     }
 
@@ -69,5 +73,15 @@ public class Quiz06_ReversePrimeNumber {
         }
         return primes;
     }
+
+    private static List<Integer> stream(int length, int [] intArr) {
+
+        return IntStream.of(intArr)
+                .mapToObj(value -> new StringBuilder(String.valueOf(value)).reverse().toString())
+                .mapToInt(Integer::parseInt)
+                .filter(number -> isPrime(number))
+                .boxed().collect(Collectors.toList());
+    }
+
 
 }
