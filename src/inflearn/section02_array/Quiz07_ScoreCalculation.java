@@ -1,5 +1,6 @@
 package inflearn.section02_array;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -13,6 +14,7 @@ public class Quiz07_ScoreCalculation {
         }
 
         System.out.println(answer(length, intArr));
+        System.out.println(refactor(length, intArr));
 
     }
 
@@ -21,10 +23,17 @@ public class Quiz07_ScoreCalculation {
         int score = 0;
         for (int i : intArr) {
             if(i == 1) score ++;
-            else {score = 0;}
+            else score = 0;
             answer += score;
         }
         return answer;
     }
 
+    private static int refactor(int length, int[] intArr) {
+        int answer = 0, score = 0;
+        for (int i : intArr) {
+            answer += score = i == 1 ? ++score : 0;
+        }
+        return answer;
+    }
 }
