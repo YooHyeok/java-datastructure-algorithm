@@ -15,6 +15,10 @@ public class Quiz06_ReversePrimeNumber {
         for (int i : solution(length, intArr)) {
             System.out.print(" " + i);
         }
+        System.out.println();
+        for (int i : answer(length, intArr)) {
+            System.out.print(" " + i);
+        }
 
     }
 
@@ -42,6 +46,26 @@ public class Quiz06_ReversePrimeNumber {
         for (int number : numbers) {
             if(isPrime(number)) primes.add(number);
 
+        }
+        return primes;
+    }
+
+    private static List<Integer> answer(int length, int[] intArr) {
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            /* ex) 1230 */
+            int tmp = intArr[i];
+            int res = 0;
+            /**
+             * 1. 10으로 나눈 나머지인 1의자리 숫자를 구한다.
+             * 1의 자리 숫자를
+             */
+            while (tmp > 0) {
+                int t = tmp % 10; // 0 / 3 / 2 / 1 - 1의자리 숫자
+                res = res * 10 + t; // 0 / 3 / 32 / 321
+                tmp = tmp / 10; // 123 / 12 / 1 / 0
+            }
+            if(isPrime(res)) primes.add(res);
         }
         return primes;
     }
