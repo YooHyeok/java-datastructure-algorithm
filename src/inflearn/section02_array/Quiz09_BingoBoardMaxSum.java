@@ -17,6 +17,7 @@ public class Quiz09_BingoBoardMaxSum {
         }
 
         System.out.println(answer(length, intArr));
+        System.out.println(solution(length, intArr));
 
     }
 
@@ -43,6 +44,35 @@ public class Quiz09_BingoBoardMaxSum {
         /* 대각선 의 합 추가*/
         if (xXSum > max) max = xXSum;
         if (xYSum > max) max = xYSum;
+
+        return max;
+    }
+
+    private static int solution(int length, int[][] intArr) {
+
+        /* 대각선 누적합, 최대값 */
+        int xXSum = 0, xYSum = 0, max = 0;
+
+        for (int i = 0; i < length; i++) {
+            /* 행, 열 누적합 */
+            int rowSum = 0, colSum = 0;
+            for (int j = 0; j < length; j++) {
+                /* 각 행의 누적합 저장*/
+                rowSum += intArr[i][j];
+                /* 각 열의 누적합 저장*/
+                colSum += intArr[j][i];
+            }
+            /* 행/열 값 최대값 처리 */
+            max = Math.max(max, colSum);
+            max = Math.max(max, rowSum);
+
+            /* 대각선의 누적 합 저장*/
+            xXSum += intArr[i][i];
+            xYSum += intArr[i][length-1-i];
+        }
+        /* 대각선 의 합 최대값 처리*/
+        max = Math.max(max, xXSum);
+        max = Math.max(max, xYSum);
 
         return max;
     }
