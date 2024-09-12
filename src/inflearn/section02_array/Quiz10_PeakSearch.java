@@ -20,7 +20,7 @@ public class Quiz10_PeakSearch {
             }
         }
         System.out.println(answer(length, intArr));
-
+        System.out.println(solution(length, intArr));
     }
 
     /**
@@ -42,19 +42,17 @@ public class Quiz10_PeakSearch {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
             boolean flag = false;
-
-                for (int k = 0; k < 4; k++) {
+            for (int k = 0; k < 4; k++) {
+                flag = false;
+                int x = i + xRange[k];
+                int y = j + yRange[k];
+                if (x > 0 && x < length && y > 0 && y < length && intArr[i][j] > intArr[x][y]) {
+                    flag = true;
+                } else {
                     flag = false;
-                    int x = i + xRange[k];
-                    int y = j + yRange[k];
-                    if (x > 0 && x < length && y > 0 && y < length && intArr[i][j] > intArr[x][y]) {
-                        flag = true;
-                    } else {
-                        flag = false;
-                        break;
-                    }
-
+                    break;
                 }
+            }
             if(flag) answer++;
             }
         }
@@ -82,13 +80,11 @@ public class Quiz10_PeakSearch {
                         flag = false;
                         break;
                     }
-
                 }
                 if(flag) answer++;
             }
         }
         return answer;
     }
-
 
 }
