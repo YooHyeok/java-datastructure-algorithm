@@ -33,6 +33,9 @@ public class Quiz01_ArrayMerge {
         for (int i : stream2(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
+        for (int i : solution(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
     }
 
     private static int[] answer1(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
@@ -55,6 +58,32 @@ public class Quiz01_ArrayMerge {
     }
     private static int[] stream2(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
         return IntStream.concat(IntStream.of(firstArr), IntStream.of(secondArr)).sorted().toArray();
+    }
+
+    /**
+     * [MergeSort]
+     * 두 길이가 일치할 때 까지 loop를 돈다.
+     * 첫번째 배열의 요소가 두번째 배열의 요소보다 작을 경우 작은 값인 첫번째 배열의 요소를 리스트에 추가한다.
+     * 만약 같거나 크다면 두번째 배열 요소를 리스트에 추가한다.
+     * 두 길이가 일치하지 않아졌을 때, 요소의 길이를 넘지않는 조건으로 각각의 Loop를 돌려 남은 요소를 리스트에 추가한다.
+     *
+     *
+     * @param firstArrLength
+     * @param firstArr
+     * @param secondArrLength
+     * @param secondArr
+     * @return
+     */
+    private static ArrayList<Integer> solution(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        int p1 = 0, p2 = 0;
+        while (p1 < firstArrLength && p2 < secondArrLength) {
+            if (firstArr[p1] < secondArr[p2]) answer.add(firstArr[p1++]);
+            else answer.add(secondArr[p2++]);
+        }
+        while (p1 < firstArrLength) answer.add(firstArr[p1++]);
+        while (p2 < secondArrLength) answer.add(secondArr[p2++]);
+        return answer;
     }
 
 }
