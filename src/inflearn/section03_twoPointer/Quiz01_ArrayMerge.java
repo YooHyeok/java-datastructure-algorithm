@@ -1,6 +1,8 @@
 package inflearn.section03_twoPointer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Quiz01_ArrayMerge {
@@ -17,17 +19,27 @@ public class Quiz01_ArrayMerge {
             secondArr[i] = sc.nextInt();
         }
 
-        for (int i : answer(firstArrLength, firstArr, secondArrLength, secondArr)) {
+        for (int i : answer1(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
+        for (int i : answer2(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
     }
 
-    private static int[] answer(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+    private static int[] answer1(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
         int[] mergeArr = new int[firstArrLength + secondArrLength];
         for (int i = 0; i < firstArrLength; i++) mergeArr[i]=firstArr[i];
         for (int i = 0; i < secondArrLength; i++) mergeArr[i+firstArrLength]=secondArr[i];
         Arrays.sort(mergeArr);
         return mergeArr;
+    }
+    private static List<Integer> answer2(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        List<Integer> answer = new ArrayList<>();
+        for (int i = 0; i < firstArrLength; i++) answer.add(firstArr[i]);
+        for (int i = 0; i < secondArrLength; i++) answer.add(secondArr[i]);
+        answer.sort((o1, o2) -> o1 - o2);
+        return answer;
     }
 
 }
