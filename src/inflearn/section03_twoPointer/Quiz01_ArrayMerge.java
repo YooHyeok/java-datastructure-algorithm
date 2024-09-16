@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Quiz01_ArrayMerge {
     public static void main(String[] args) {
@@ -25,6 +27,9 @@ public class Quiz01_ArrayMerge {
         for (int i : answer2(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
+        for (int i : stream(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
     }
 
     private static int[] answer1(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
@@ -40,6 +45,10 @@ public class Quiz01_ArrayMerge {
         for (int i = 0; i < secondArrLength; i++) answer.add(secondArr[i]);
         answer.sort((o1, o2) -> o1 - o2);
         return answer;
+    }
+
+    private static int[] stream(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        return Stream.concat(Stream.of(firstArr), Stream.of(secondArr)).flatMapToInt(Arrays::stream).sorted().distinct().toArray();
     }
 
 }
