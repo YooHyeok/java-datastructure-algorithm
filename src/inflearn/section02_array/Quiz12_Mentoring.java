@@ -15,6 +15,7 @@ public class Quiz12_Mentoring {
             }
         }
         System.out.println(answer(n, m, arr));
+        System.out.println(refactor(n, m, arr));
     }
     static class Pair {
         int mento;
@@ -60,6 +61,21 @@ public class Quiz12_Mentoring {
         int maxValue = map.entrySet().stream().mapToInt(entry -> entry.getValue()).max().getAsInt(); // 각 시험별 짝 카운트의 max 값
         int count = (int) map.entrySet().stream().filter(entry -> entry.getValue() == maxValue).count();
         return count;
+    }
+
+    private static int refactor(int n, int m, int[][] arr) {
+        Map<Pair, Integer> map = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = j+1; k < n; k++) {
+                    Pair pair = new Pair();
+                    pair.mento = arr[i][j];
+                    pair.menti = arr[i][k];
+                    map.put(pair, map.getOrDefault(pair, 1) + 1);
+                }
+            }
+        }
+        return (int) map.entrySet().stream().filter(entry -> entry.getValue() == m).count();
     }
 
 }
