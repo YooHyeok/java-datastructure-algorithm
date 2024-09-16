@@ -30,6 +30,9 @@ public class Quiz01_ArrayMerge {
         for (int i : stream(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
+        for (int i : stream2(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
     }
 
     private static int[] answer1(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
@@ -49,6 +52,9 @@ public class Quiz01_ArrayMerge {
 
     private static int[] stream(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
         return Stream.concat(Stream.of(firstArr), Stream.of(secondArr)).flatMapToInt(Arrays::stream).sorted().distinct().toArray();
+    }
+    private static int[] stream2(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        return IntStream.concat(IntStream.of(firstArr), IntStream.of(secondArr)).sorted().toArray();
     }
 
 }
