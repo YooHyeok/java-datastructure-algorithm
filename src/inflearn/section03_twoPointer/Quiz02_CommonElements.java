@@ -22,6 +22,9 @@ public class Quiz02_CommonElements {
         for (int i : wrong_answer(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
+        for (int i : answer(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
     }
 
     /**
@@ -42,6 +45,31 @@ public class Quiz02_CommonElements {
             p2++;
         }
         answer.sort((o1, o2) -> o1-o2);
+        return answer;
+    }
+
+    /**
+     * merge sort - 두 배열이 모두 정렬되어 있다는 전제하에 사용할 수 있다.
+     * first의 요소와 second 요소의 정렬된 값을 비교한다.
+     * first요소를 second요소와 비교한다.
+     * first요소 값이 작다면, first index를 증가시킨다.
+     * 다시 비교하여 first값과 값이 일치하다면, first와 second의 index를 모두 증가시킨다.
+     * (이때 해당 요소값을 List에 추가하면 됨.)
+     */
+    private static List<Integer> answer(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        Arrays.sort(firstArr);
+        Arrays.sort(secondArr);
+        List<Integer> answer = new ArrayList<>();
+        int p1 = 0, p2 = 0;
+        while (p1 < firstArrLength && p2 < secondArrLength) {
+            if (firstArr[p1] < secondArr[p2]) p1++;
+            else if (firstArr[p1] > secondArr[p2]) p2++;
+            else if (firstArr[p1] == secondArr[p2]){
+                answer.add(firstArr[p1]);
+                p1++;
+                p2++;
+            }
+        }
         return answer;
     }
 
