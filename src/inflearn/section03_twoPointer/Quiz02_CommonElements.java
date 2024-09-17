@@ -25,6 +25,9 @@ public class Quiz02_CommonElements {
         for (int i : answer(firstArrLength, firstArr, secondArrLength, secondArr)) {
             System.out.print(i + " ");
         }
+        for (int i : solution(firstArrLength, firstArr, secondArrLength, secondArr)) {
+            System.out.print(i + " ");
+        }
     }
 
     /**
@@ -69,6 +72,24 @@ public class Quiz02_CommonElements {
                 p1++;
                 p2++;
             }
+        }
+        return answer;
+    }
+
+    private static List<Integer> solution(int firstArrLength, int[] firstArr, int secondArrLength, int[] secondArr) {
+        Arrays.sort(firstArr);
+        Arrays.sort(secondArr);
+        List<Integer> answer = new ArrayList<>();
+        int p1 = 0, p2 = 0;
+        while (p1 < firstArrLength && p2 < secondArrLength) {
+            if (firstArr[p1] == secondArr[p2]) {
+                answer.add(firstArr[p1]);
+                p1++;
+                p2++;
+            }
+            else if (firstArr[p1] < secondArr[p2]) p1++;
+            else p2++;
+
         }
         return answer;
     }
