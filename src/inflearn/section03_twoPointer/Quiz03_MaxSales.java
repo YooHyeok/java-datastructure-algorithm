@@ -13,6 +13,7 @@ public class Quiz03_MaxSales {
         }
 
         System.out.println(wrong_answer(n, k, sales) + " ");
+        System.out.println(answer(n, k, sales) + " ");
     }
 
     /**
@@ -29,6 +30,21 @@ public class Quiz03_MaxSales {
                 if(j >= n) break;
                 sum += sales[j];
             }
+            max = Math.max(max, sum);
+        }
+        return max;
+    }
+
+    private static int answer(int n, int k , int[] sales) {
+        int max = 0, sum = 0;
+
+        for (int i = 0; i < k; i++) {
+            sum += sales[i];
+        }
+        max = sum;
+        for (int j = 0; j < n; j++) {
+            if(j == n-k) break;
+            sum = sum - sales[j] + sales[j+k];
             max = Math.max(max, sum);
         }
         return max;
