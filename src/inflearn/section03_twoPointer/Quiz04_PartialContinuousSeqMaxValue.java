@@ -13,6 +13,7 @@ public class Quiz04_PartialContinuousSeqMaxValue {
         }
 
         System.out.println(answer1(n, k, sales) + " ");
+        System.out.println(answer2(n, k, sales) + " ");
     }
 
     /**
@@ -31,6 +32,23 @@ public class Quiz04_PartialContinuousSeqMaxValue {
             if (sum == k) { // 같을 경우!
                 ++count;
                 if(pi == n-1 || pj == n-1) break;
+                sum -= sales[pi++];
+                sum += sales[++pj];
+            }
+        }
+        return count;
+    }
+
+    private static int answer2(int n, int k , int[] sales) {
+        int pi = 0, pj = 0, count = 0, sum = 0;
+        sum = sales[pi];
+        while (pi < n && pj < n) {
+            if (pi == n-1 || pj == n-1) break;
+            else if (sum < k)  sum += sales[++pj]; // k가 더 크면 누적합에서 현재 포인트의 sales값을 뺀다.
+            else if (sum > k) sum -= sales[pi++]; // sum이 더 크면 누적합에서 현재 포인트의 sales값을 더한다.
+            if (sum == k) { // 동일조건은 무조건 체크해야 한다.
+                ++count;
+                if (pi == n-1 || pj == n-1) break;
                 sum -= sales[pi++];
                 sum += sales[++pj];
             }
