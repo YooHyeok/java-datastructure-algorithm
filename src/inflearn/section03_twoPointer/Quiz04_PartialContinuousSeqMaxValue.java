@@ -14,6 +14,7 @@ public class Quiz04_PartialContinuousSeqMaxValue {
 
         System.out.println(answer1(n, k, sales) + " ");
         System.out.println(answer2(n, k, sales) + " ");
+        System.out.println(solution(n, k, sales) + " ");
     }
 
     /**
@@ -55,5 +56,20 @@ public class Quiz04_PartialContinuousSeqMaxValue {
         }
         return count;
     }
+
+
+    private static int solution(int n, int m, int[] sales) {
+        int sum = 0, lp = 0, answer = 0;
+        for (int rp = 0; rp < n; rp++) {
+            sum += sales[rp];
+            if (sum == m) answer++;
+            while (sum >= m) { //누적합이 m보다 클 경우 반복한다.
+                sum -= sales[lp++];
+                if (sum == m) answer++;
+            }
+        }
+        return answer;
+    }
+
 
 }
