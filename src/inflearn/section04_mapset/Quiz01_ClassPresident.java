@@ -9,6 +9,7 @@ public class Quiz01_ClassPresident {
         int n = sc.nextInt();
         String str = sc.next();
         System.out.println(answer(n, str));
+        System.out.println(solution(n, str));
     }
 
     private static char answer(int n, String str) {
@@ -27,4 +28,22 @@ public class Quiz01_ClassPresident {
         return answer;
     }
 
+    /**
+     * for문 차이
+     */
+    private static char solution(int n, String str) {
+        char answer = ' ';
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char c : str.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        int max = Integer.MIN_VALUE;
+        for (Character key : map.keySet()) {
+            if (map.get(key) > max) {
+                max = map.get(key);
+                answer = key;
+            }
+        }
+        return answer;
+    }
 }
