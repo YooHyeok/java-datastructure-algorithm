@@ -12,6 +12,7 @@ public class Quiz02_Anagram {
         System.out.println(answer1(str1, str2));
         System.out.println(answer2(str1, str2));
         System.out.println(answer3(str1, str2));
+        System.out.println(solution(str1, str2));
     }
 
     private static String answer1(String str1, String str2) {
@@ -76,4 +77,19 @@ public class Quiz02_Anagram {
         return "YES";
     }
 
+    /**
+     * 세번째 풀이방식에서의 -1 즉 contain 포함하지 않는 경우에 대한 처리를 함께 미리 처리한 풀이방법이다.
+     */
+    private static String solution(String s1, String s2){
+//        String answer="YES";
+        HashMap<Character, Integer> map=new HashMap<>();
+        for(char x : s1.toCharArray()){
+            map.put(x, map.getOrDefault(x, 0)+1);
+        }
+        for(char x : s2.toCharArray()){
+            if(!map.containsKey(x) || map.get(x)==0) return "NO";
+            map.put(x, map.get(x)-1);
+        }
+        return "YES";
+    }
 }
