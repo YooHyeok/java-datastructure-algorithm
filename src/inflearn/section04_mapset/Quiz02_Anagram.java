@@ -11,6 +11,7 @@ public class Quiz02_Anagram {
         String str2 = sc.next();
         System.out.println(answer1(str1, str2));
         System.out.println(answer2(str1, str2));
+        System.out.println(answer3(str1, str2));
     }
 
     private static String answer1(String str1, String str2) {
@@ -48,6 +49,31 @@ public class Quiz02_Anagram {
             sum += map.get(character);
         }
         return sum == 0 ? "YES" : "NO";
+    }
+
+    /**
+     * 혹은 getOrDefault를 0으로 간 뒤
+     * 음수 혹은 양수가 나오면 두 값의 길이가 일치하지 않는것이기 때문에, 바로 No의값을 리턴한다.
+     * 만약 비교값/대상값에서 특정 알파벳 두 값의 갯수가 일치하다면 0이 나올수밖에 없다.
+     */
+    private static String answer3(String str1, String str2) {
+        char[] chars = str1.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < chars.length; i++) {
+            map.put(chars[i], map.getOrDefault(chars[i], 0) + 1);
+        }
+        char[] chars2 = str2.toCharArray();
+        for (int i = 0; i < chars2.length; i++) {
+            if (map.containsKey(chars2[i])) {
+                map.put(chars2[i], map.get(chars2[i]) - 1);
+            }
+        }
+        for (Character character : map.keySet()) {
+            if (map.get(character) != 0) {
+                return "NO";
+            }
+        }
+        return "YES";
     }
 
 }
