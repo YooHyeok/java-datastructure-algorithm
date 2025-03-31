@@ -31,6 +31,7 @@ public class Quiz04_AllAnagram {
         String t = sc.next();
         System.out.println(answer(s, t));
         System.out.println(refactor(s, t));
+        System.out.println(solution(s, t));
 
     }
 
@@ -91,7 +92,29 @@ public class Quiz04_AllAnagram {
         }
         return answer;
     }
-    
+
+    /**
+     * 기준 데이터는 미리 Map에 모두 넣어주고
+     * 비교할 데이터를 rp의 직전까지 초기화해놓는다.
+     * [ rp추가(증가) → 동등비교 → lp삭제(증가) ] 작업을 반복한다.
+     * 위와같이 +1-1이 아닌 삭제/추가 방식으로 작업한다면 기준데이터에 없는값은 초기화할때 추가해도 된다. (lp커서의 차례가 오면 삭제할것이므로)
+     * 또한 배열로 변경하지않고 charAt으로 접근하여 관리한다.
+     */
+    private static int solution(String s, String t) {
+        int answer = 0, lp = 0;
+        HashMap<Character, Integer> tMap = new HashMap<>();
+        HashMap<Character, Integer> sMap = new HashMap<>();
+        for (char tc : t.toCharArray()) tMap.put(tc, tMap.getOrDefault(tc, 0) + 1);
+        for (int i=0; i < t.length()-1; i++) sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
+        for (int rp = t.length()-1; rp < s.length(); rp++) {
+            sMap.put(s.charAt(rp), sMap.getOrDefault(s.charAt(rp), 0) + 1);
+            if(tMap.equals(sMap)) answer++;
+            sMap.put(s.charAt(lp), sMap.get(s.charAt(lp)) - 1);
+            if(sMap.get(s.charAt(lp)) == 0) sMap.remove(s.charAt(lp));
+            ++lp;
+        }
+        return answer;
+    }
 }
 
 
