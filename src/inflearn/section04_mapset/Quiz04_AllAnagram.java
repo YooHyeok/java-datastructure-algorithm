@@ -30,6 +30,7 @@ public class Quiz04_AllAnagram {
         String s = sc.next();
         String t = sc.next();
         System.out.println(answer(s, t));
+        System.out.println(refactor(s, t));
 
     }
 
@@ -64,6 +65,33 @@ public class Quiz04_AllAnagram {
         return answer;
     }
 
+    /**
+     * lp, rp 모두 0,0에서 시작한다.
+     */
+    private static int refactor(String s, String t) {
+        int answer = 0, lp = 0, count = 0;
+        HashMap<Character, Integer> tMap = new HashMap<>();
+        HashMap<Character, Integer> sMap = new HashMap<>();
+        char[] tChars = t.toCharArray();
+        char[] sChars = s.toCharArray();
+        /* 기준 데이터 tMap 초기화 */
+        for (int i = 0; i < tChars.length; i++) tMap.put(tChars[i], tMap.getOrDefault(tChars[i], 0) + 1);
+        /* TwoPointer Sliding Window 구현 */
+        for (int rp = 0; rp < sChars.length; rp++) {
+            /* 존재하는 하는 key라면 value 1 증가 */
+            if (tMap.containsKey(sChars[rp])) sMap.put(sChars[rp], sMap.getOrDefault(sChars[rp], 0) + 1);
+            ++count;
+            if(count == t.length()) {
+                if(tMap.equals(sMap)) answer++;
+                --count;
+                // 부분배열의 첫 인덱스 확인 후 감소 - lp 증가, count감소
+                if (sMap.containsKey(sChars[lp])) sMap.put(sChars[lp], sMap.get(sChars[lp]) - 1);
+                lp++;
+            }
+        }
+        return answer;
+    }
+    
 }
 
 
