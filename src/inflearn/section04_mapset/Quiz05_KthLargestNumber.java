@@ -13,6 +13,7 @@ public class Quiz05_KthLargestNumber {
         }
         System.out.println(answer(n, k, ints));
         System.out.println(solution(n, k, ints));
+        System.out.println(refactor(n, k, ints));
     }
 
     /**
@@ -56,4 +57,15 @@ public class Quiz05_KthLargestNumber {
         return -1;
     }
 
+    private static int refactor(int n, int k, int[] ints) {
+        TreeSet<Integer> treeSet = new TreeSet<>(Collections.reverseOrder());
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                for (int l = j+1; l < n; l++) {
+                    treeSet.add(ints[i] + ints[j] + ints[l]);
+                }
+            }
+        }
+        return treeSet.toArray().length < k ? -1 : (int)treeSet.toArray()[k-1];
+    }
 }
