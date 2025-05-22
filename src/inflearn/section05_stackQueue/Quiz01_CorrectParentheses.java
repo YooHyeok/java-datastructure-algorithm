@@ -9,6 +9,7 @@ public class Quiz01_CorrectParentheses {
         String value = sc.next();
         System.out.println(answer1(value));
         System.out.println(answer2(value));
+        System.out.println(solution(value));
     }
 
     /**
@@ -43,4 +44,20 @@ public class Quiz01_CorrectParentheses {
         return stack.size() == 0 ? "YES" : "NO";
     }
 
+    /**
+     * 가장 최근(top) 데이터 삭제 : pop()
+     * stack이 비어있는데 문자가 ) 라면 열린적없는데 닫으면 잘못된 괄호이므로 No return
+     */
+    private static String solution(String value) {
+
+        Stack<Character> stack = new Stack<>();
+        for (char c : value.toCharArray()) {
+            if (c == '(') stack.add(c);
+            if (c == ')') {
+                if(stack.isEmpty()) return "NO";
+                stack.pop();
+            }
+        }
+        return stack.size() == 0 ? "YES" : "NO";
+    }
 }
