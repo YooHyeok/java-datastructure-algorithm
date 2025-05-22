@@ -8,6 +8,7 @@ public class Quiz01_CorrectParentheses {
         Scanner sc = new Scanner(System.in);
         String value = sc.next();
         System.out.println(answer1(value));
+        System.out.println(answer2(value));
     }
 
     /**
@@ -24,6 +25,22 @@ public class Quiz01_CorrectParentheses {
         }
 //        return open == close ? "YES" : "NO";
         return open == 0 ? "YES" : "NO";
+    }
+
+    /**
+     * stack이 열린게 하나도 없는데 문자가 ) 잘못된 괄호이므로 No return
+     */
+    private static String answer2(String value) {
+
+        Stack<Character> stack = new Stack<>();
+        for (char c : value.toCharArray()) {
+            if (c == '(') stack.add(c);
+            if (c == ')') {
+                if(!stack.contains('(')) return "NO";
+                stack.remove(new Character('('));
+            }
+        }
+        return stack.size() == 0 ? "YES" : "NO";
     }
 
 }
