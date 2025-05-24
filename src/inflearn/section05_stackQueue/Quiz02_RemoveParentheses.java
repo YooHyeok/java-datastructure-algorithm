@@ -8,6 +8,7 @@ public class Quiz02_RemoveParentheses {
         Scanner sc = new Scanner(System.in);
         String value = sc.next();
         System.out.println(answer(value));
+        System.out.println(solution(value));
     }
 
     private static String answer(String value) {
@@ -24,5 +25,17 @@ public class Quiz02_RemoveParentheses {
         }
         return sb.toString();
     }
-
+    
+    public static String solution(String str){
+        String answer="";
+        Stack<Character> stack=new Stack<>();
+        for(char x : str.toCharArray()){
+            if(x==')'){
+                while(stack.pop()!='(');
+            }
+            else stack.push(x);
+        }
+        for(int i=0; i<stack.size(); i++) answer+=stack.get(i);
+        return answer;
+    }
 }
