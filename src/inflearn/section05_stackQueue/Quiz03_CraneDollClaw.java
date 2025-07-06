@@ -21,10 +21,11 @@ public class Quiz03_CraneDollClaw {
 
         System.out.println(answer(n, board, m, moves));
         System.out.println(solution(board, moves));
+        System.out.println(refactor(n, board, m, moves));
     }
     // 4, 3, 1, 1, 3, 2, X, 4
     // 4, 1, 1, 1, 3
-    public static int answer(int length, int[][] board, int m, int[] moves) {
+    private static int answer(int length, int[][] board, int m, int[] moves) {
         int answer = 0;
         Stack<Integer> stack = new Stack();
         for (int i = 0; i < moves.length; i++) {
@@ -46,7 +47,7 @@ public class Quiz03_CraneDollClaw {
         return answer * 2;
     }
 
-    public static int solution(int[][] board, int[] moves){
+    private static int solution(int[][] board, int[] moves){
         int answer=0;
         Stack<Integer> stack = new Stack<>();
         for(int pos : moves){
@@ -64,6 +65,24 @@ public class Quiz03_CraneDollClaw {
             }
         }
         return answer;
+    }
+
+    private static int refactor(int length, int[][] board, int m, int[] moves) {
+        int answer = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (int move : moves) {
+            for (int i = 0; i < length; i++) {
+                if (board[i][move - 1] != 0) {
+                    if (!stack.isEmpty() && stack.peek() == board[i][move - 1]) {
+                        answer++;
+                        stack.pop();
+                    } else stack.push(board[i][move - 1]);
+                    board[i][move-1] = 0;
+                    break;
+                }
+            }
+        }
+        return answer*2;
     }
 
 }
