@@ -20,10 +20,11 @@ public class Quiz03_CraneDollClaw {
         }
 
         System.out.println(answer(n, board, m, moves));
+        System.out.println(solution(board, moves));
     }
     // 4, 3, 1, 1, 3, 2, X, 4
     // 4, 1, 1, 1, 3
-    private static int answer(int length, int[][] board, int m, int[] moves) {
+    public static int answer(int length, int[][] board, int m, int[] moves) {
         int answer = 0;
         Stack<Integer> stack = new Stack();
         for (int i = 0; i < moves.length; i++) {
@@ -45,5 +46,24 @@ public class Quiz03_CraneDollClaw {
         return answer * 2;
     }
 
+    public static int solution(int[][] board, int[] moves){
+        int answer=0;
+        Stack<Integer> stack = new Stack<>();
+        for(int pos : moves){
+            for(int i=0; i<board.length; i++){
+                if(board[i][pos-1]!=0){
+                    int tmp=board[i][pos-1];
+                    board[i][pos-1]=0;
+                    if(!stack.isEmpty() && tmp==stack.peek()){
+                        answer+=2;
+                        stack.pop();
+                    }
+                    else stack.push(tmp);
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
 
 }
