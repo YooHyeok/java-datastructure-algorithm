@@ -10,6 +10,7 @@ public class Quiz06_SaveThePrincess {
         int n = sc.nextInt();
         int k = sc.nextInt();
         System.out.println(answer(n, k));
+        System.out.println(solution(n, k));
     }
 
     /**
@@ -35,6 +36,24 @@ public class Quiz06_SaveThePrincess {
 
         }
         return queue.peek();
+    }
+
+    /**
+     * 큐의 1번부터 k-1번째 값까지 순차적으로 순회하며 큐의 끝으로 이동
+     * 이후 k번째 값을 무조건 제거함.
+     * 만약 queue에 데이터가 1개남으면 제거하고 해당 데이터를 반환
+     * (queue가 비므로 while 종료)
+     */
+    private static int solution(int n, int k) {
+        int answer = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 1; i <= n; i++) queue.offer(i);
+        while (!queue.isEmpty()) { //Queue가 비어있지 않은동안 반복 (비면 중단)
+            for (int i = 1; i < k; i++) queue.offer(queue.poll()); // k번 만큼 제거 후 끝에 저장
+            queue.poll(); // k번 이후 값 제거....
+            if(queue.size() == 1) answer = queue.poll(); // queue에 데이터가 1개남으면 제거하고 해당 데이터를 반환 (queue가 비므로 while 종료)
+        }
+        return answer;
     }
 
 }
