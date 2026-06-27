@@ -10,6 +10,7 @@ public class Quiz07_CurriculumDesign {
         String a = sc.next();
         String b = sc.next();
         System.out.println(answer(a, b));
+        System.out.println(solution(a, b));
     }
 
     /**
@@ -25,6 +26,25 @@ public class Quiz07_CurriculumDesign {
             if (queue.peek() == c) queue.remove();
         }
         return "NO";
+    }
+
+    /**
+     * Q에 문자가 존재하면, Q의 첫번째 요소를 꺼내어 비교하고, 다르면 "NO"를 반환
+     * 존재하는지 여부를 확인하는 이유는, 존재하지 않는데 꺼내버리면, 순서보장이 안된다.
+     * 만약 D와 A를 비교할때 둘이 일치하지않는데 A를 꺼내어 확인하면, Queue에서 A가 삭제되기 때문이다.
+     * (Peek후 일치하는 조건에서 Remove하는거면 상관없을것 같다.)
+     * 모든 순회가 끝나고, Queue에 값이 남았다면 "NO"를 반환
+     * 그렇지 않으면, Queue가 비어있으므로 순차적으로 비교되어 지워진것이기 때문에 "YES"를 반환.
+     */
+    private static String solution(String a, String b) {
+        Queue<Character> Q = new LinkedList<>();
+        for (char c : a.toCharArray()) Q.offer(c);
+        for (char c : b.toCharArray()) {
+            if (Q.contains(c) && Q.poll()!=c) return "NO";
+
+        }
+        if (!Q.isEmpty()) return "NO";
+        return "YES";
     }
 
 }
