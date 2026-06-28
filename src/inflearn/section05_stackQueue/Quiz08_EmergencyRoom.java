@@ -30,6 +30,7 @@ public class Quiz08_EmergencyRoom {
             arr[i] = sc.nextInt();
         }
         System.out.println(answer(N, M, arr));
+        System.out.println(solution(N, M, arr));
     }
 
     private static int answer(int N, int M, int[] arr) {
@@ -50,6 +51,33 @@ public class Quiz08_EmergencyRoom {
                 count ++;
             }
 
+        }
+        return count;
+    }
+
+    private static int solution(int N, int M, int[] arr) {
+        int count = 1;
+        Queue<Person> Q = new LinkedList<>();
+        for (int i = 0; i < N; i++) Q.add(new Person(i, arr[i]));
+        while (!Q.isEmpty()) {
+            Person temp = Q.poll(); // 첫번째 요소 일단 제거후 반환
+            /**
+             * 큐에서 꺼낸 첫번째 요소를 기존 Q의 첫번째 요소(제거했으므로 두번째)부터 탐색하여
+             * 더 큰값이 존재하면 큐의 맨 뒤에 넣고 임시저장소를 비운 뒤 현재 꺼내어진 첫번째 Queue 요소에 대한 반복문 종료.
+             * 만약 반복문이 종료되고도 임시저장소가 비어있지 않다면, 초기화 되지 않았으므로
+             * 현재 루프에서 꺼낸 첫번째 큐 값 보다 더 큰값이 없는 경우이다.
+             */
+            for (Person person : Q) {
+                if (temp.priority < person.priority) {
+                    Q.offer(temp);
+                    temp = null;
+                    break;
+                }
+            }
+            if (temp != null) { // 더 큰값이 없는 경우 (최대값)
+                if (temp.id == M) return count;
+                else count++;
+            }
         }
         return count;
     }
